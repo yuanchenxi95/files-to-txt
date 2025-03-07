@@ -6,6 +6,10 @@ fn main() {
         includes: vec![".rs"],
         excludes: Vec::new(),
     };
-    let text = FilesToText::read_all(options);
-    println!("{}", text);
+    // let text = FilesToText::read_all(options);
+    // println!("{}", text);
+    FilesToText::read_to_file(
+        options,
+        "./test.txt"
+    ).unwrap()
 }

@@ -62,7 +62,8 @@ impl<'a, T: Write> FileReader<'a, T> {
     pub(crate) fn read_to_output(&mut self) -> io::Result<()> {
         let files = self.read_files();
         for file in files {
-            self.write.write(file.as_bytes())?;
+            let file_path_without_prefix = file.replace(self.options.source_folder, "");
+            self.write.write(file_path_without_prefix.as_bytes())?;
             self.write.write("=========================\n".as_bytes())?;
             let mut file = File::open(file)?;
             io::copy(&mut file, &mut self.write)?;
